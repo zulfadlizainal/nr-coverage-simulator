@@ -2,6 +2,7 @@
 
 import pandas as pd
 import numpy as np
+import math
 import matplotlib.pyplot as plt
 
 df_antpat = pd.read_excel('Antenna_Pattern.xlsx', encoding='utf-8_sig')
@@ -221,3 +222,16 @@ hloss_cell_3 = rotate(hloss_cell_3, azi_cell_3)
 vloss_cell_3 = rotate(vloss_cell_3, mtilt_cell_3)
 
 del antpat_df_H_Cell_3, antpat_df_V_Cell_3
+
+####################################Mesh Calculation################################
+
+grid = 200
+step = 10
+
+col = np.arange(start = grid, stop = 0 - step, step = -step)
+idx = np.arange(start = grid, stop = 0 - step, step = -step)
+
+col = col.reshape(int(grid/step)+1,1)
+
+mesh = np.sqrt((np.power(col,2)) + (np.power(idx,2)))
+meshdf_1 = pd.DataFrame(mesh)
