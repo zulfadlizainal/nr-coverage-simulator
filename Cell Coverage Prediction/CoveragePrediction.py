@@ -5,6 +5,9 @@ import numpy as np
 import math
 import matplotlib.pyplot as plt
 
+#Ignore warning if calculation devide by 'zero' or 'Nan'
+np.seterr(divide='ignore', invalid='ignore')
+
 df_antpat = pd.read_excel('Antenna_Pattern.xlsx', encoding='utf-8_sig')
 df_cellparam = pd.read_excel('Cell_Parameter.xlsx', encoding='utf-8_sig')
 
@@ -59,6 +62,10 @@ mtilt_cell_3 = df_cellparam.iloc[3,3]
 ssbpower_cell_1 = df_cellparam.iloc[4,1]
 ssbpower_cell_2 = df_cellparam.iloc[4,2]
 ssbpower_cell_3 = df_cellparam.iloc[4,3]
+
+freq_cell_1 = df_cellparam.iloc[5,1]
+freq_cell_2 = df_cellparam.iloc[5,2]
+freq_cell_3 = df_cellparam.iloc[5,3]
 
 #Antenna Pattern Selection
 
@@ -225,13 +232,40 @@ del antpat_df_H_Cell_3, antpat_df_V_Cell_3
 
 ####################################Mesh Calculation################################
 
+#Define mesh radius in meters
 grid = 200
 step = 10
 
+#Create Matrix based on Radius
 col = np.arange(start = grid, stop = 0 - step, step = -step)
 idx = np.arange(start = grid, stop = 0 - step, step = -step)
+idx_ones = np.ones(int(grid/step) + 1)
 
-col = col.reshape(int(grid/step)+1,1)
+col = col.reshape(int(grid/step)+1,1)                                                   #Change Matrix
 
-mesh = np.sqrt((np.power(col,2)) + (np.power(idx,2)))
-meshdf_1 = pd.DataFrame(mesh)
+#Create 1/4 Mesh Based on Matrix
+distance_flat = np.sqrt((np.power(col,2)) + (np.power(idx,2)))                          #Flat Distance from Center Point
+col_dis = col*idx_ones                                                                  #Dummy distance towards straight Lines
+
+angle_H = np.rad2deg(np.arcsin(col_dis/distance_flat))                                  #Horizontal Angle from Center Point
+angle_H = np.round(angle_H)                                                             #Round the angle
+
+distance_hp_1 = np.sqrt((np.power(distance_flat,2)) + (np.power(height_cell_1,2)))     #Hypotenuse Distance from Cell Height (Cell 1)
+distance_hp_2 = np.sqrt((np.power(distance_flat,2)) + (np.power(height_cell_2,2)))     #Hypotenuse Distance from Cell Height (Cell 2)
+distance_hp_3 = np.sqrt((np.power(distance_flat,2)) + (np.power(height_cell_2,2)))     #Hypotenuse Distance from Cell Height (Cell 3)
+
+angle_V_1 = 90 - np.rad2deg(np.arcsin(distance_flat/distance_hp_1))                    #Vertical Angle from Center Point (Cell 1)
+angle_V_1 = np.round(angle_V_1)                                                        #Round the angle
+angle_V_2 = 90 - np.rad2deg(np.arcsin(distance_flat/distance_hp_2))                    #Vertical Angle from Center Point (Cell 2)
+angle_V_2 = np.round(angle_V_2)                                                        #Round the angle
+angle_V_3 = 90 - np.rad2deg(np.arcsin(distance_flat/distance_hp_3))                    #Vertical Angle from Center Point (Cell 3)
+angle_V_3 = np.round(angle_V_3)                                                        #Round the angle
+
+#Calculate Path Loss Model - Free Space Model
+
+
+
+
+# a = np.flip(distance_flat)
+# b = np.flip(distance_flat, axis = 0)
+# c = np.flip(distance_flat, axis = 1)
