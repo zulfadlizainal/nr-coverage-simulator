@@ -230,6 +230,10 @@ vloss_cell_3 = rotate(vloss_cell_3, mtilt_cell_3)
 
 del antpat_df_H_Cell_3, antpat_df_V_Cell_3
 
+#######################################Clear Memory#################################
+
+del df_antpat, df_antpat_display, df_antpat_info, df_cellparam
+
 ####################################Mesh Calculation################################
 
 #Define mesh radius in meters
@@ -268,10 +272,11 @@ fs_pl_2 = 20*np.log10(distance_hp_2) + 20*np.log10(freq_cell_2) - 27.55         
 fs_pl_3 = 20*np.log10(distance_hp_3) + 20*np.log10(freq_cell_3) - 27.55                #Path Loss for Cell 3
 
 del grid, step, col, col_dis, idx, idx_ones
+del distance_flat, distance_hp_1, distance_hp_2, distance_hp_3
 
 ####################################Create Full Mesh################################
 
-######Path Loss######
+######Path Loss (Cell 1)######
 
 #Flip Path Loss
 fs_pl_1_NE = np.flip(fs_pl_1, axis = 1)
@@ -282,16 +287,107 @@ fs_pl_1 = pd.DataFrame(fs_pl_1)                                                 
 fs_pl_1_NE = pd.DataFrame(fs_pl_1_NE)                                           #Convert array to Dataframe
 fs_pl_1_NE = fs_pl_1_NE.iloc[:,1:]                                              #Remove redundant columns
 
-fs_pl_1 = pd.concat([fs_pl_1, fs_pl_1_NE], axis = 1, sort = False)
-fs_pl_1_S = fs_pl_1.values
-fs_pl_1_S = np.flip(fs_pl_1_S, axis = 0)
+fs_pl_1 = pd.concat([fs_pl_1, fs_pl_1_NE], axis = 1, sort = False)              #First half of the Mesh
+fs_pl_1_S = fs_pl_1.values                                                      #Switch to array because dataframe cannot flip
+fs_pl_1_S = np.flip(fs_pl_1_S, axis = 0)                                        #Create 2nd half of the Mesh
 fs_pl_1_S = pd.DataFrame(fs_pl_1_S)
 fs_pl_1_S = fs_pl_1_S.iloc[1:,:]
 
-fs_pl_1.columns = fs_pl_1_S.columns
+fs_pl_1.columns = fs_pl_1_S.columns                                             #Standardize column 1st and 2nd half of the Mesh
 
-fs_pl_1 = pd.concat([fs_pl_1, fs_pl_1_S], axis=0, sort=False)
-
+fs_pl_1 = pd.concat([fs_pl_1, fs_pl_1_S], axis=0, sort=False)                   #Form a complete mesh grid
 fs_pl_1 = fs_pl_1.reset_index(drop=True)
 
 del fs_pl_1_NE, fs_pl_1_S
+
+######Path Loss (Cell 2)######
+
+#Flip Path Loss
+fs_pl_2_NE = np.flip(fs_pl_2, axis = 1)
+
+#Prepare Dataframe
+fs_pl_2 = pd.DataFrame(fs_pl_2)                                                 #Convert array to Dataframe
+
+fs_pl_2_NE = pd.DataFrame(fs_pl_2_NE)                                           #Convert array to Dataframe
+fs_pl_2_NE = fs_pl_2_NE.iloc[:,1:]                                              #Remove redundant columns
+
+fs_pl_2 = pd.concat([fs_pl_2, fs_pl_2_NE], axis = 1, sort = False)              #First half of the Mesh
+fs_pl_2_S = fs_pl_2.values                                                      #Switch to array because dataframe cannot flip
+fs_pl_2_S = np.flip(fs_pl_2_S, axis = 0)                                        #Create 2nd half of the Mesh
+fs_pl_2_S = pd.DataFrame(fs_pl_2_S)
+fs_pl_2_S = fs_pl_2_S.iloc[1:,:]
+
+fs_pl_2.columns = fs_pl_2_S.columns                                             #Standardize column 1st and 2nd half of the Mesh
+
+fs_pl_2 = pd.concat([fs_pl_2, fs_pl_2_S], axis=0, sort=False)                   #Form a complete mesh grid
+fs_pl_2 = fs_pl_2.reset_index(drop=True)
+
+del fs_pl_2_NE, fs_pl_2_S
+
+######Path Loss (Cell 3)######
+
+#Flip Path Loss
+fs_pl_3_NE = np.flip(fs_pl_3, axis = 1)
+
+#Prepare Dataframe
+fs_pl_3 = pd.DataFrame(fs_pl_3)                                                 #Convert array to Dataframe
+
+fs_pl_3_NE = pd.DataFrame(fs_pl_3_NE)                                           #Convert array to Dataframe
+fs_pl_3_NE = fs_pl_3_NE.iloc[:,1:]                                              #Remove redundant columns
+
+fs_pl_3 = pd.concat([fs_pl_3, fs_pl_3_NE], axis = 1, sort = False)              #First half of the Mesh
+fs_pl_3_S = fs_pl_3.values                                                      #Switch to array because dataframe cannot flip
+fs_pl_3_S = np.flip(fs_pl_3_S, axis = 0)                                        #Create 2nd half of the Mesh
+fs_pl_3_S = pd.DataFrame(fs_pl_3_S)
+fs_pl_3_S = fs_pl_3_S.iloc[1:,:]
+
+fs_pl_3.columns = fs_pl_3_S.columns                                             #Standardize column 1st and 2nd half of the Mesh
+
+fs_pl_3 = pd.concat([fs_pl_3, fs_pl_3_S], axis=0, sort=False)                   #Form a complete mesh grid
+fs_pl_3 = fs_pl_3.reset_index(drop=True)
+
+del fs_pl_3_NE, fs_pl_3_S
+
+
+######Horizontal Degree (All Cell)######
+
+#Rotate and Flip Horizontal Degree
+angle_H_NE = np.rot90(angle_H)
+angle_H_NE = np.flip(angle_H_NE, axis = 0)
+angle_H_NE = np.flip(angle_H_NE, axis = 1)
+
+angle_H_SE = np.rot90(angle_H_NE, 3)
+angle_H_SE = angle_H_SE + 90
+
+angle_H_SW = np.rot90(angle_H_SE, 3)
+angle_H_SW = angle_H_SW + 90
+
+angle_H_NW = np.rot90(angle_H_SW, 3)
+angle_H_NW = angle_H_NW + 90
+
+#Prepare Dataframe
+angle_H_NE = pd.DataFrame(angle_H_NE)
+angle_H_SE = pd.DataFrame(angle_H_SE)
+angle_H_SW = pd.DataFrame(angle_H_SW)
+angle_H_NW = pd.DataFrame(angle_H_NW)
+angle_H_SE = angle_H_SE.iloc[1:,:]
+angle_H_SW = angle_H_SW.iloc[1:,:-1]
+angle_H_NW = angle_H_NW.iloc[:,:-1]
+
+#Combine Dataframe to become Mesh
+angle_H_N = pd.concat([angle_H_NW, angle_H_NE], axis=1, sort=False)
+angle_H_N = angle_H_N.values
+angle_H_N = pd.DataFrame(angle_H_N)
+
+angle_H_S = pd.concat([angle_H_SW, angle_H_SE], axis=1, sort=False)
+angle_H_S = angle_H_S.values
+angle_H_S = pd.DataFrame(angle_H_S)
+
+angle_H = pd.concat([angle_H_N, angle_H_S], axis=0, sort=False)
+angle_H = angle_H.values
+angle_H = pd.DataFrame(angle_H)
+
+del angle_H_N, angle_H_S, angle_H_NE, angle_H_SE, angle_H_SW, angle_H_NW
+
+
+#Todo PerSector HL, VD, VL
