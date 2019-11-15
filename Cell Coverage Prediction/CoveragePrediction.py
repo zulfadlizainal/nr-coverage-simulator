@@ -263,9 +263,35 @@ angle_V_3 = np.round(angle_V_3)                                                 
 
 #Calculate Path Loss Model - Free Space Model
 
+fs_pl_1 = 20*np.log10(distance_hp_1) + 20*np.log10(freq_cell_1) - 27.55                #Path Loss for Cell 1
+fs_pl_2 = 20*np.log10(distance_hp_2) + 20*np.log10(freq_cell_2) - 27.55                #Path Loss for Cell 2
+fs_pl_3 = 20*np.log10(distance_hp_3) + 20*np.log10(freq_cell_3) - 27.55                #Path Loss for Cell 3
 
+del grid, step, col, col_dis, idx, idx_ones
 
+####################################Create Full Mesh################################
 
-# a = np.flip(distance_flat)
-# b = np.flip(distance_flat, axis = 0)
-# c = np.flip(distance_flat, axis = 1)
+######Path Loss######
+
+#Flip Path Loss
+fs_pl_1_NE = np.flip(fs_pl_1, axis = 1)
+
+#Prepare Dataframe
+fs_pl_1 = pd.DataFrame(fs_pl_1)                                                 #Convert array to Dataframe
+
+fs_pl_1_NE = pd.DataFrame(fs_pl_1_NE)                                           #Convert array to Dataframe
+fs_pl_1_NE = fs_pl_1_NE.iloc[:,1:]                                              #Remove redundant columns
+
+fs_pl_1 = pd.concat([fs_pl_1, fs_pl_1_NE], axis = 1, sort = False)
+fs_pl_1_S = fs_pl_1.values
+fs_pl_1_S = np.flip(fs_pl_1_S, axis = 0)
+fs_pl_1_S = pd.DataFrame(fs_pl_1_S)
+fs_pl_1_S = fs_pl_1_S.iloc[1:,:]
+
+fs_pl_1.columns = fs_pl_1_S.columns
+
+fs_pl_1 = pd.concat([fs_pl_1, fs_pl_1_S], axis=0, sort=False)
+
+fs_pl_1 = fs_pl_1.reset_index(drop=True)
+
+del fs_pl_1_NE, fs_pl_1_S
