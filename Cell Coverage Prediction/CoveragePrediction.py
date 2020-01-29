@@ -349,7 +349,7 @@ fs_pl_3 = fs_pl_3.reset_index(drop=True)
 del fs_pl_3_NE, fs_pl_3_S
 
 
-######Horizontal Degree (All Cell)######
+######Horizontal Degree Mesh (All Cell)######
 
 #Rotate and Flip Horizontal Degree
 angle_H_NE = np.rot90(angle_H)
@@ -386,8 +386,58 @@ angle_H_S = pd.DataFrame(angle_H_S)
 angle_H = pd.concat([angle_H_N, angle_H_S], axis=0, sort=False)
 angle_H = angle_H.values
 angle_H = pd.DataFrame(angle_H)
+angle_H = angle_H.fillna(0)
 
 del angle_H_N, angle_H_S, angle_H_NE, angle_H_SE, angle_H_SW, angle_H_NW
 
+# TODO:  PerSector HL, VD, VL
 
-#Todo PerSector HL, VD, VL
+######Horizontal Loss Mesh (All Cell)######
+
+#Cell 1 - Horizontal Loss
+hloss_mesh_cell_1 = angle_H.copy()
+temp = pd.Series([])
+
+i = 0
+j = 0
+
+for i in range(len(angle_H)):
+    j = 0
+    for j in range(len(angle_H)):
+        temp = angle_H[i][j]
+        temp = temp.astype(np.int64)
+        hloss_mesh_cell_1[i][j] = hloss_cell_1[temp]
+
+del temp, i, j
+
+#Cell 2 - Horizontal Loss
+hloss_mesh_cell_2 = angle_H.copy()
+temp = pd.Series([])
+
+i = 0
+j = 0
+
+for i in range(len(angle_H)):
+    j = 0
+    for j in range(len(angle_H)):
+        temp = angle_H[i][j]
+        temp = temp.astype(np.int64)
+        hloss_mesh_cell_2[i][j] = hloss_cell_2[temp]
+
+del temp, i, j
+
+#Cell 3 - Horizontal Loss
+hloss_mesh_cell_3 = angle_H.copy()
+temp = pd.Series([])
+
+i = 0
+j = 0
+
+for i in range(len(angle_H)):
+    j = 0
+    for j in range(len(angle_H)):
+        temp = angle_H[i][j]
+        temp = temp.astype(np.int64)
+        hloss_mesh_cell_3[i][j] = hloss_cell_3[temp]
+
+del temp, i, j
