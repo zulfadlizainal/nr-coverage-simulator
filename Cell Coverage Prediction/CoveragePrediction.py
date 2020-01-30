@@ -390,7 +390,6 @@ angle_H = angle_H.fillna(0)
 
 del angle_H_N, angle_H_S, angle_H_NE, angle_H_SE, angle_H_SW, angle_H_NW
 
-# TODO:  PerSector HL, VD, VL
 
 ######Horizontal Loss Mesh (All Cell)######
 
@@ -441,3 +440,110 @@ for i in range(len(angle_H)):
         hloss_mesh_cell_3[i][j] = hloss_cell_3[temp]
 
 del temp, i, j
+
+
+######Vertical Degree Mesh (All Cell)######
+
+#Cell 1
+
+#Rotate and Flip Vertical Degree
+
+angle_V_1_NW = angle_V_1
+angle_V_1_NE = np.flip(angle_V_1_NW, axis = 1)
+angle_V_1_SW = np.flip(angle_V_1_NW, axis = 0)
+angle_V_1_SE = np.flip(angle_V_1_NE, axis = 0)
+
+#Prepare Dataframe
+angle_V_1_NE = pd.DataFrame(angle_V_1_NE)
+angle_V_1_SE = pd.DataFrame(angle_V_1_SE)
+angle_V_1_SW = pd.DataFrame(angle_V_1_SW)
+angle_V_1_NW = pd.DataFrame(angle_V_1_NW)
+angle_V_1_SE = angle_V_1_SE.iloc[1:,:]
+angle_V_1_SW = angle_V_1_SW.iloc[1:,:-1]
+angle_V_1_NW = angle_V_1_NW.iloc[:,:-1]
+
+#Combine Dataframe to become Mesh
+angle_V_1_N = pd.concat([angle_V_1_NW, angle_V_1_NE], axis=1, sort=False)
+angle_V_1_N = angle_V_1_N.values
+angle_V_1_N = pd.DataFrame(angle_V_1_N)
+
+angle_V_1_S = pd.concat([angle_V_1_SW, angle_V_1_SE], axis=1, sort=False)
+angle_V_1_S = angle_V_1_S.values
+angle_V_1_S = pd.DataFrame(angle_V_1_S)
+
+angle_V_1 = pd.concat([angle_V_1_N, angle_V_1_S], axis=0, sort=False)
+angle_V_1 = angle_V_1.values
+angle_V_1 = pd.DataFrame(angle_V_1)
+angle_V_1 = angle_V_1.fillna(0)
+
+del angle_V_1_N, angle_V_1_S, angle_V_1_NE, angle_V_1_SE, angle_V_1_SW, angle_V_1_NW
+
+#Cell 2
+
+#Rotate and Flip Vertical Degree
+
+angle_V_2_NW = angle_V_2
+angle_V_2_NE = np.flip(angle_V_2_NW, axis = 1)
+angle_V_2_SW = np.flip(angle_V_2_NW, axis = 0)
+angle_V_2_SE = np.flip(angle_V_2_NE, axis = 0)
+
+#Prepare Dataframe
+angle_V_2_NE = pd.DataFrame(angle_V_2_NE)
+angle_V_2_SE = pd.DataFrame(angle_V_2_SE)
+angle_V_2_SW = pd.DataFrame(angle_V_2_SW)
+angle_V_2_NW = pd.DataFrame(angle_V_2_NW)
+angle_V_2_SE = angle_V_2_SE.iloc[1:,:]
+angle_V_2_SW = angle_V_2_SW.iloc[1:,:-1]
+angle_V_2_NW = angle_V_2_NW.iloc[:,:-1]
+
+#Combine Dataframe to become Mesh
+angle_V_2_N = pd.concat([angle_V_2_NW, angle_V_2_NE], axis=1, sort=False)
+angle_V_2_N = angle_V_2_N.values
+angle_V_2_N = pd.DataFrame(angle_V_2_N)
+
+angle_V_2_S = pd.concat([angle_V_2_SW, angle_V_2_SE], axis=1, sort=False)
+angle_V_2_S = angle_V_2_S.values
+angle_V_2_S = pd.DataFrame(angle_V_2_S)
+
+angle_V_2 = pd.concat([angle_V_2_N, angle_V_2_S], axis=0, sort=False)
+angle_V_2 = angle_V_2.values
+angle_V_2 = pd.DataFrame(angle_V_2)
+angle_V_2 = angle_V_2.fillna(0)
+
+del angle_V_2_N, angle_V_2_S, angle_V_2_NE, angle_V_2_SE, angle_V_2_SW, angle_V_2_NW
+
+#Cell 3
+
+#Rotate and Flip Vertical Degree
+
+angle_V_3_NW = angle_V_3
+angle_V_3_NE = np.flip(angle_V_3_NW, axis = 1)
+angle_V_3_SW = np.flip(angle_V_3_NW, axis = 0)
+angle_V_3_SE = np.flip(angle_V_3_NE, axis = 0)
+
+#Prepare Dataframe
+angle_V_3_NE = pd.DataFrame(angle_V_3_NE)
+angle_V_3_SE = pd.DataFrame(angle_V_3_SE)
+angle_V_3_SW = pd.DataFrame(angle_V_3_SW)
+angle_V_3_NW = pd.DataFrame(angle_V_3_NW)
+angle_V_3_SE = angle_V_3_SE.iloc[1:,:]
+angle_V_3_SW = angle_V_3_SW.iloc[1:,:-1]
+angle_V_3_NW = angle_V_3_NW.iloc[:,:-1]
+
+#Combine Dataframe to become Mesh
+angle_V_3_N = pd.concat([angle_V_3_NW, angle_V_3_NE], axis=1, sort=False)
+angle_V_3_N = angle_V_3_N.values
+angle_V_3_N = pd.DataFrame(angle_V_3_N)
+
+angle_V_3_S = pd.concat([angle_V_3_SW, angle_V_3_SE], axis=1, sort=False)
+angle_V_3_S = angle_V_3_S.values
+angle_V_3_S = pd.DataFrame(angle_V_3_S)
+
+angle_V_3 = pd.concat([angle_V_3_N, angle_V_3_S], axis=0, sort=False)
+angle_V_3 = angle_V_3.values
+angle_V_3 = pd.DataFrame(angle_V_3)
+angle_V_3 = angle_V_3.fillna(0)
+
+del angle_V_3_N, angle_V_3_S, angle_V_3_NE, angle_V_3_SE, angle_V_3_SW, angle_V_3_NW
+
+# TODO:  PerSector VL
