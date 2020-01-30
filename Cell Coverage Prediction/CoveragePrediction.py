@@ -546,4 +546,55 @@ angle_V_3 = angle_V_3.fillna(0)
 
 del angle_V_3_N, angle_V_3_S, angle_V_3_NE, angle_V_3_SE, angle_V_3_SW, angle_V_3_NW
 
-# TODO:  PerSector VL
+
+######Vertical Loss Mesh (All Cell)######
+
+#Cell 1 - Vertical Loss
+vloss_mesh_cell_1 = angle_V_1.copy()
+temp = pd.Series([])
+
+i = 0
+j = 0
+
+for i in range(len(angle_V_1)):
+    j = 0
+    for j in range(len(angle_V_1)):
+        temp = angle_V_1[i][j]
+        temp = temp.astype(np.int64)
+        vloss_mesh_cell_1[i][j] = vloss_cell_1[temp]
+
+del temp, i, j
+
+
+#Cell 2 - Vertical Loss
+vloss_mesh_cell_2 = angle_V_2.copy()
+temp = pd.Series([])
+
+i = 0
+j = 0
+
+for i in range(len(angle_V_2)):
+    j = 0
+    for j in range(len(angle_V_2)):
+        temp = angle_V_2[i][j]
+        temp = temp.astype(np.int64)
+        vloss_mesh_cell_2[i][j] = vloss_cell_2[temp]
+
+del temp, i, j
+
+
+#Cell 3 - Vertical Loss
+vloss_mesh_cell_3 = angle_V_3.copy()
+temp = pd.Series([])
+
+i = 0
+j = 0
+
+for i in range(len(angle_V_3)):
+    j = 0
+    for j in range(len(angle_V_3)):
+        temp = angle_V_3[i][j]
+        temp = temp.astype(np.int64)
+        vloss_mesh_cell_3[i][j] = vloss_cell_3[temp]
+
+del temp, i, j
