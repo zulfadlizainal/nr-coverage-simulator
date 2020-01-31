@@ -645,3 +645,13 @@ tloss_mesh_cell_3 = fs_pl_3 + hloss_mesh_cell_3 + vloss_mesh_cell_3
 rsrp_mesh_cell_1 = ssbpower_cell_1 - tloss_mesh_cell_1
 rsrp_mesh_cell_2 = ssbpower_cell_2 - tloss_mesh_cell_2
 rsrp_mesh_cell_3 = ssbpower_cell_3 - tloss_mesh_cell_3
+
+#Convet DF to Numpy Array
+rsrp_mesh_cell_1 = rsrp_mesh_cell_1.to_numpy()
+rsrp_mesh_cell_2 = rsrp_mesh_cell_2.to_numpy()
+rsrp_mesh_cell_3 = rsrp_mesh_cell_3.to_numpy()
+
+#Pick Max value in every mesh
+rsrp_mesh = np.maximum.reduce([rsrp_mesh_cell_1, rsrp_mesh_cell_2, rsrp_mesh_cell_3])
+rsrp_mesh[rsrp_mesh < -140] = -140
+rsrp_mesh = pd.DataFrame(rsrp_mesh)
