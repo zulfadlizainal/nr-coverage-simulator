@@ -2,8 +2,12 @@
 
 import pandas as pd
 import numpy as np
-import math
+import time
 import matplotlib.pyplot as plt
+
+#Ignore warning for heatmap legend
+import logging
+logging.getLogger().setLevel(logging.CRITICAL)
 
 # Ignore warning if calculation devide by 'zero' or 'Nan'
 np.seterr(divide='ignore', invalid='ignore')
@@ -248,8 +252,8 @@ del df_antpat, df_antpat_display, df_antpat_info, df_cellparam
 ####################################Mesh Calculation################################
 
 # Define mesh radius in meters
-grid = 200
-step = 10
+grid = 2000
+step = 20
 
 # Create Matrix based on Radius
 col = np.arange(start=grid, stop=0 - step, step=-step)
@@ -296,7 +300,7 @@ fs_pl_2 = 20 * np.log10(distance_hp_2) + 20 * \
 fs_pl_3 = 20 * np.log10(distance_hp_3) + 20 * \
     np.log10(freq_cell_3) - 27.55  # Path Loss for Cell 3
 
-del grid, step, col, col_dis, idx, idx_ones
+del col, col_dis, idx, idx_ones
 del distance_flat, distance_hp_1, distance_hp_2, distance_hp_3
 
 ####################################Create Full Mesh################################
@@ -655,3 +659,39 @@ rsrp_mesh_cell_3 = rsrp_mesh_cell_3.to_numpy()
 rsrp_mesh = np.maximum.reduce([rsrp_mesh_cell_1, rsrp_mesh_cell_2, rsrp_mesh_cell_3])
 rsrp_mesh[rsrp_mesh < -140] = -140
 rsrp_mesh = pd.DataFrame(rsrp_mesh)
+
+
+######Plot RSRP Map######
+
+plt.imshow(rsrp_mesh, cmap='RdYlGn', interpolation='hermite', vmin = -130, vmax = -60, extent=[grid*(-1), grid, grid*(-1), grid])
+
+#plt.colorbar()
+
+plt.xlabel("Distance (m)")
+plt.ylabel("Distance (m)")
+
+ax = plt.gca()
+ax.set_xticks(np.arange(grid*(-1), grid, (step*20)))
+ax.set_yticks(np.arange(grid*(-1), grid, (step*20)))
+
+plt.title("Coverage Map (RSRP - FSPL Model)")
+plt.grid(which='major', axis='both', linestyle='--')
+
+plt.colorbar()
+plt.legend(title="RSRP (dBm)", loc='lower right')
+
+plt.show()
+
+
+######Processing Time######
+
+time = time.process_time()
+print(f'\nProcessing Time: {time} secs')
+
+
+#End
+print(' ')
+print('ありがとうございました！！')
+print('Download this program: https://github.com/zulfadlizainal')
+print('Author: https://www.linkedin.com/in/zulfadlizainal')
+print(' ')
