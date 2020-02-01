@@ -90,6 +90,8 @@ antpat1.drop(antpat1.index[[0, 1, 2, 3, 724, 725,
                             726, 727, 1448, 1449, 1450]], inplace=True)
 antpat1 = antpat1.reset_index(drop=True)
 
+gain_cell_1 = df_antpat_info.loc[pattern_cell_1, 'Gain (dBi)']
+
 # Seperate Horizontal and Vertical DataFrame - Cell 1
 
 antpat_H1 = antpat1.iloc[0:720, :]
@@ -144,6 +146,8 @@ antpat2 = pd.DataFrame(antpat2)
 antpat2.drop(antpat2.index[[0, 1, 2, 3, 724, 725,
                             726, 727, 1448, 1449, 1450]], inplace=True)
 antpat2 = antpat2.reset_index(drop=True)
+
+gain_cell_2 = df_antpat_info.loc[pattern_cell_2, 'Gain (dBi)']
 
 # Seperate Horizontal and Vertical DataFrame - Cell 2
 
@@ -200,6 +204,8 @@ antpat3 = pd.DataFrame(antpat3)
 antpat3.drop(antpat3.index[[0, 1, 2, 3, 724, 725,
                             726, 727, 1448, 1449, 1450]], inplace=True)
 antpat3 = antpat3.reset_index(drop=True)
+
+gain_cell_3 = df_antpat_info.loc[pattern_cell_3, 'Gain (dBi)']
 
 # Seperate Horizontal and Vertical DataFrame - Cell 3
 
@@ -646,9 +652,9 @@ tloss_mesh_cell_2 = fs_pl_2 + hloss_mesh_cell_2 + vloss_mesh_cell_2
 tloss_mesh_cell_3 = fs_pl_3 + hloss_mesh_cell_3 + vloss_mesh_cell_3
 
 #RSRP Cell 1, 2, and 3
-rsrp_mesh_cell_1 = ssbpower_cell_1 - tloss_mesh_cell_1
-rsrp_mesh_cell_2 = ssbpower_cell_2 - tloss_mesh_cell_2
-rsrp_mesh_cell_3 = ssbpower_cell_3 - tloss_mesh_cell_3
+rsrp_mesh_cell_1 = ssbpower_cell_1 + gain_cell_1 - tloss_mesh_cell_1
+rsrp_mesh_cell_2 = ssbpower_cell_2 + gain_cell_2 - tloss_mesh_cell_2
+rsrp_mesh_cell_3 = ssbpower_cell_3 + gain_cell_3 - tloss_mesh_cell_3
 
 #Convet DF to Numpy Array
 rsrp_mesh_cell_1 = rsrp_mesh_cell_1.to_numpy()
@@ -674,11 +680,11 @@ ax = plt.gca()
 ax.set_xticks(np.arange(grid*(-1), grid, (step*20)))
 ax.set_yticks(np.arange(grid*(-1), grid, (step*20)))
 
-plt.title("Coverage Map (RSRP - FSPL Model)")
+plt.title("5G Coverage Map (SS-RSRP - FSPL Model)")
 plt.grid(which='major', axis='both', linestyle='--')
 
 plt.colorbar()
-plt.legend(title="RSRP (dBm)", loc='lower right')
+plt.legend(title="SS-RSRP (dBm)", loc='lower right')
 
 plt.show()
 
