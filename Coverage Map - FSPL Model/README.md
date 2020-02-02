@@ -14,7 +14,7 @@ Basic link diagram:
 Antenna pattern loss in H Plane and V Plane is being considered:
 <br />
 <br />
-<img src="https://github.com/zulfadlizainal/4G-NB-IoT-Resource-Utilization/blob/master/img/NSFUtil_NSF.pnghttps://github.com/zulfadlizainal/5G-NR-Coverage-Prediction/blob/master/img/FSPL_AntPat.png" alt="Ant Pattern" title="Ant Pattern" width=100% height=100% />
+<img src="https://github.com/zulfadlizainal/5G-NR-Coverage-Prediction/blob/master/img/FSPL_AntPat.png" alt="Ant Pattern" title="Ant Pattern" width=100% height=100% />
 <br />
 <br />
 Image of antenna pattern radiation and loss:
