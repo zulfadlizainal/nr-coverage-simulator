@@ -3,7 +3,7 @@ Simulating a coverage map for 5G NR through few possibilities of path loss model
 
 ### List of projects
 
-Coverage Map - Free Space Path Loss Model ([Link](https://github.com/zulfadlizainal/5G-NR-Coverage-Prediction/tree/master/Coverage%20Map%20-%20FSPL%20Model))
+Coverage Map - Free Space Path Loss Model ([Link](https://github.com/zulfadlizainal/5G-NR-Coverage-Prediction#1-coverage-map---free-space-path-loss-model-link))
 <br />
 
 ## 1. Coverage Map - Free Space Path Loss Model ([Link](https://github.com/zulfadlizainal/5G-NR-Coverage-Prediction/tree/master/Coverage%20Map%20-%20FSPL%20Model))
