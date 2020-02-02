@@ -3,7 +3,7 @@
 This simulation is based on Free Space Path Loss model to estimate the SS-RSRP coverage in 5G NR. Few possibilities of configuration can be set to understand the impact of any RF parameter tuning to the coverage.
 
 ### Explanation
-The simulation is considering link gain and loss factors in 5G NR implementation. Parameters to be considered in this simulation is: Antenna Gain, Antenna Pattern (HLoss & VLoss), SSB Tx Power, and Path Loss Model (Antenna Height, UE Height, Channel Model, and Distance). The main goal is to estimate the SS-RSRP coverage level.
+The simulation is considering link gain and loss factors in 5G NR implementation. Parameters to be considered in this simulation are: Antenna Gain, Antenna Pattern (HLoss & VLoss), SSB Tx Power, and Path Loss Model (Antenna Height, UE Height, Channel Model, and Distance). The main goal is to estimate the SS-RSRP coverage level.
 
 Basic link diagram:
 <br />
