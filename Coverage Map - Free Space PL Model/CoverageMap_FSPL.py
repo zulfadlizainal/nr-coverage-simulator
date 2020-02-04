@@ -663,13 +663,23 @@ rsrp_mesh_cell_3 = rsrp_mesh_cell_3.to_numpy()
 
 #Pick Max value in every mesh
 rsrp_mesh = np.maximum.reduce([rsrp_mesh_cell_1, rsrp_mesh_cell_2, rsrp_mesh_cell_3])
-rsrp_mesh[rsrp_mesh < -140] = -140
+
+#Remove out of range samples
+rsrp_mesh_cell_1[rsrp_mesh_cell_1 < -140] = np.nan
+rsrp_mesh_cell_2[rsrp_mesh_cell_2 < -140] = np.nan
+rsrp_mesh_cell_3[rsrp_mesh_cell_3 < -140] = np.nan
+rsrp_mesh[rsrp_mesh < -140] = np.nan
+
+#Change numpy array to pandas dataframe
+rsrp_mesh_cell_1 = pd.DataFrame(rsrp_mesh_cell_1)
+rsrp_mesh_cell_2 = pd.DataFrame(rsrp_mesh_cell_2)
+rsrp_mesh_cell_3 = pd.DataFrame(rsrp_mesh_cell_3)
 rsrp_mesh = pd.DataFrame(rsrp_mesh)
 
 
 ######Plot RSRP Map######
 
-plt.imshow(rsrp_mesh, cmap='RdYlGn', interpolation='hermite', vmin = -130, vmax = -60, extent=[grid*(-1), grid, grid*(-1), grid])
+plt.imshow(rsrp_mesh, cmap='RdYlGn', interpolation='hermite', vmin = -140, vmax = -60, extent=[grid*(-1), grid, grid*(-1), grid])
 
 #plt.colorbar()
 
