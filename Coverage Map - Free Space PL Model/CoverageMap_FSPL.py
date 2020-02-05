@@ -690,7 +690,7 @@ ax = plt.gca()
 ax.set_xticks(np.arange(grid*(-1), grid, (step*20)))
 ax.set_yticks(np.arange(grid*(-1), grid, (step*20)))
 
-plt.title("5G Coverage Map (SS-RSRP - FSPL Model)")
+plt.title("5G Coverage Map\nSS-RSRP - Free Space PL Model\n")
 plt.grid(which='major', axis='both', linestyle='--')
 
 plt.colorbar()
