@@ -687,7 +687,7 @@ ax = plt.gca()
 ax.set_xticks(np.arange(grid*(-1), grid, (step*20)))
 ax.set_yticks(np.arange(grid*(-1), grid, (step*20)))
 
-plt.title("5G Coverage Map\nSS-RSRP - Measurement Based PL Model [3.5GHz]\n")
+plt.title("5G Coverage Map\nSS-RSRP - Measurement Based PL Model [3.9GHz]\n")
 plt.grid(which='major', axis='both', linestyle='--')
 
 plt.colorbar()
