@@ -16,12 +16,16 @@ The method that being used to create measurement based PL model are listed as fo
 4. Derive a polynomial equation that represents path loss and distance as below chart.
 <br />
 Testing Setup:
+<br />
+<br />
 Tech: 5G NR NSA
+<br />
 Band: n77 3.9GHz
+<br />
 SSB Power: 15dBm
 <br />
 <br />
-<img src="https://github.com/zulfadlizainal/5G-NR-Coverage-Prediction/blob/master/img/MBPLN77_Explain1.png.png" alt="n77 MBPL" title="n77 MBPL" width=100% height=100% />
+<img src="https://github.com/zulfadlizainal/5G-NR-Coverage-Prediction/blob/master/img/MBPLN77_Explain1.png" alt="n77 MBPL" title="n77 MBPL" width=100% height=100% />
 <br />
 <br />
 
