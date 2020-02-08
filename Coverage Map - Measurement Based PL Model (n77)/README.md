@@ -4,11 +4,11 @@ This simulation is derived from actual measurement data of live 5G NR site in ba
 
 ### Explanation
 
-The basic concept of path loss model is explain here ([Link](https://github.com/zulfadlizainal/5G-NR-Coverage-Prediction/tree/master/Coverage%20Map%20-%20Free%20Space%20PL%20Model)). However, the accuracy is fallen far from good. Hence, utilizing the actual measurement data of 5G NR may give a lot more accuracy to the created model.
+The basic concept of path loss model is explained here ([Link](https://github.com/zulfadlizainal/5G-NR-Coverage-Prediction/tree/master/Coverage%20Map%20-%20Free%20Space%20PL%20Model)). However, the accuracy is fallen far from good. Hence, this model will try to utilize the actual measurement data of 5G NR aiming to improves accuracy to the prediction.
 
 ### Path Loss Model
 
-The method that being used to create measurement based PL model are listed as follows:
+The method that I use to create measurement based PL model are listed as follows:
 <br />
 1. Measure 5G NR SS-RSRP at several locations with GPS information attached.
 2. Calculate the distance of every collected samples from the serving 5G NR gNB.
