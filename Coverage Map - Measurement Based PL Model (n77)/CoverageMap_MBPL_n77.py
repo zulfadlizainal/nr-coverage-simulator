@@ -259,7 +259,7 @@ del df_antpat, df_antpat_display, df_antpat_info, df_cellparam
 
 # Define mesh radius in meters
 grid = 600
-step = 20
+step = 10
 
 # Create Matrix based on Radius
 col = np.arange(start=grid, stop=0 - step, step=-step)
