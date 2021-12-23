@@ -12,8 +12,8 @@ logging.getLogger().setLevel(logging.CRITICAL)
 # Ignore warning if calculation devide by 'zero' or 'Nan'
 np.seterr(divide='ignore', invalid='ignore')
 
-df_antpat = pd.read_excel('Antenna_Pattern.xlsx', encoding='utf-8_sig')
-df_cellparam = pd.read_excel('Cell_Parameter.xlsx', encoding='utf-8_sig')
+df_antpat = pd.read_excel('Antenna_Pattern.xlsx')
+df_cellparam = pd.read_excel('Cell_Parameter.xlsx')
 
 # Create Indicators
 
