@@ -1,4 +1,4 @@
-# 5G-NR-Coverage-Prediction
+# 5G-NR-Coverage-Simulator
 Simulating a coverage map for 5G NR through few possibilities of path loss model. Main goal in the future would be creating a machine learning based path loss model.
 
 ### List of projects
